@@ -290,12 +290,6 @@
       margin-bottom: 22px;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      font-weight: 400;
-      color: var(--scarlet);
-    }
-
     .brand-statement {
       font-family: var(--font-display);
       font-size: 28px;
@@ -783,11 +777,35 @@
       color: var(--scarlet);
     }
 
-    .pdf-frame {
+    .pdf-viewer {
       width: 100%;
       height: 100%;
-      border: none;
       background: var(--gray-100);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 18px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .pdf-viewer canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      background: white;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+    }
+
+    .pdf-loading {
+      font-family: var(--font-detail);
+      font-size: 13px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gray-500);
+      align-self: center;
+      justify-self: center;
     }
 
     .testimonial {
@@ -1226,6 +1244,11 @@
         height: 86vh;
       }
 
+      .pdf-viewer {
+        padding: 12px;
+        gap: 12px;
+      }
+
       .pdf-modal-title {
         font-size: 20px;
       }
@@ -1399,6 +1422,11 @@
       .pdf-modal-header {
         padding: 10px 12px 10px 14px;
       }
+
+      .pdf-viewer {
+        padding: 8px;
+        gap: 10px;
+      }
     }
   </style>
 </head>
@@ -1431,7 +1459,7 @@
 
       <div class="hero-text">
         <div class="hero-tag">Learning & Development Professional Portfolio</div>
-        <h1>Jennay R. Barkley, <em>M.Ed.</em></h1>
+        <h1>Jennay R. Barkley, M.Ed</h1>
         <p class="hero-summary">
           I'm a Learning & Development Specialist with over 7 years of experience designing training solutions that make
           complex information clear and accessible. I specialize in bridging the gap between subject matter experts,
@@ -1610,7 +1638,7 @@
     </section>
 
     <footer>
-      <div>&copy; 2026 Jennay R. Barkley, M.Ed. - All rights reserved.</div>
+      <div>&copy; 2026 Jennay R. Barkley, M.Ed - All rights reserved.</div>
       <div class="footer-links"><a href="https://www.linkedin.com/in/jennayrechelbarkley/" target="_blank"
           rel="noopener noreferrer">LinkedIn</a><a href="mailto:jrbarkleyconsulting@gmail.com">Email</a></div>
     </footer>
@@ -1623,10 +1651,11 @@
         <div class="pdf-modal-title" id="pdf-modal-title">Artifact Preview</div>
         <button class="pdf-modal-close" type="button" id="pdf-modal-close" aria-label="Close PDF preview">X</button>
       </div>
-      <iframe class="pdf-frame" id="pdf-frame" title="PDF preview"></iframe>
+      <div class="pdf-viewer" id="pdf-viewer" aria-label="PDF preview"></div>
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
@@ -1642,23 +1671,65 @@
     });
 
     const pdfModal = document.getElementById('pdf-modal');
-    const pdfFrame = document.getElementById('pdf-frame');
+    const pdfViewer = document.getElementById('pdf-viewer');
     const pdfTitle = document.getElementById('pdf-modal-title');
     const pdfCloseButton = document.getElementById('pdf-modal-close');
+    let activePdfUrl = '';
+    let renderToken = 0;
+
+    if (window.pdfjsLib) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    }
+
+    async function renderPdf(url) {
+      const token = ++renderToken;
+      pdfViewer.innerHTML = '<div class="pdf-loading">Loading preview</div>';
+
+      if (!window.pdfjsLib) {
+        pdfViewer.innerHTML = '<div class="pdf-loading">Preview unavailable</div>';
+        return;
+      }
+
+      const pdf = await pdfjsLib.getDocument(url).promise;
+      if (token !== renderToken) return;
+
+      pdfViewer.innerHTML = '';
+      const availableWidth = Math.max(pdfViewer.clientWidth - 2, 280);
+
+      for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+        if (token !== renderToken) return;
+
+        const page = await pdf.getPage(pageNumber);
+        const baseViewport = page.getViewport({ scale: 1 });
+        const scale = availableWidth / baseViewport.width;
+        const viewport = page.getViewport({ scale });
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+
+        canvas.width = Math.floor(viewport.width);
+        canvas.height = Math.floor(viewport.height);
+        pdfViewer.appendChild(canvas);
+
+        await page.render({ canvasContext: context, viewport }).promise;
+      }
+    }
 
     function openPdfModal(url, title) {
       pdfTitle.textContent = title;
-      pdfFrame.src = url + '#toolbar=0&navpanes=0&scrollbar=1';
+      activePdfUrl = url;
       pdfModal.classList.add('active');
       pdfModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
       pdfCloseButton.focus();
+      renderPdf(url);
     }
 
     function closePdfModal() {
       pdfModal.classList.remove('active');
       pdfModal.setAttribute('aria-hidden', 'true');
-      pdfFrame.src = '';
+      renderToken++;
+      activePdfUrl = '';
+      pdfViewer.innerHTML = '';
       document.body.style.overflow = '';
     }
 
@@ -1681,6 +1752,15 @@
       if (event.key === 'Escape' && pdfModal.classList.contains('active')) {
         closePdfModal();
       }
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', function () {
+      if (!pdfModal.classList.contains('active') || !activePdfUrl) return;
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () {
+        renderPdf(activePdfUrl);
+      }, 180);
     });
 
     const navToggle = document.querySelector('.nav-toggle');
