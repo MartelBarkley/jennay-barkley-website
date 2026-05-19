@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study - Jennay R. Barkley</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --scarlet: #BB0000;
+      --scarlet-deep: #960000;
+      --gray-900: #1a1a1a;
+      --gray-800: #2d2d2d;
+      --gray-700: #404040;
+      --gray-500: #686868;
+      --gray-400: #9a9a9a;
+      --gray-300: #bfbfbf;
+      --gray-200: #e0e0e0;
+      --gray-100: #f0f0f0;
+      --cream: #FAF8F5;
+      --accent-gold: #C5A456;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-detail: 'DM Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--gray-900);
+      overflow-x: hidden;
+    }
+
+    .wireframe-bar {
+      background: var(--gray-900);
+      color: white;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-detail);
+      font-size: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .wireframe-bar span {
+      opacity: 0.6;
+    }
+
+    .wireframe-bar strong {
+      color: var(--scarlet);
+      font-weight: 600;
+    }
+
+    .wireframe-badge {
+      background: var(--scarlet);
+      color: white;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      position: relative;
+      z-index: 100;
+      background: rgba(250, 248, 245, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 72px;
+    }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+      text-decoration: none;
+      color: var(--gray-900);
+    }
+
+    .nav-name .accent {
+      color: var(--scarlet);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .nav-links a {
+      font-family: var(--font-detail);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--gray-700);
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: var(--scarlet);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--scarlet);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      background: white;
+      color: var(--gray-900);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-toggle span {
+      width: 20px;
+      height: 2px;
+      background: currentColor;
+      display: block;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .cs-back {
+      margin-top: 48px;
+      padding: 0 48px;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cs-back a {
+      font-family: var(--font-detail);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      color: var(--scarlet);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s;
+    }
+
+    .cs-back a:hover {
+      gap: 12px;
+    }
+
+    .cs-hero-banner {
+      margin: 32px auto 0;
+      max-width: 1184px;
+      height: 340px;
+      background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cs-hero-banner .cs-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
+        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
+        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
+        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%);
+      background-size: 40px 70px;
+      background-position: 0 0, 0 0, 20px 35px, 20px 35px;
+    }
+
+    .cs-hero-banner span {
+      font-family: var(--font-detail);
+      font-size: 14px;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      z-index: 1;
+    }
+
+    .cs-header {
+      padding: 48px 48px 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .project-tag {
+      display: inline-block;
+      font-family: var(--font-detail);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      margin-bottom: 12px;
+      background: rgba(197, 164, 86, 0.12);
+      padding: 4px 12px;
+      border-radius: 3px;
+    }
+
+    .cs-header h1 {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .cs-header .cs-subtitle {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--gray-700);
+      margin-bottom: 40px;
+    }
+
+    .cs-meta-bar {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .cs-meta-item {
+      padding: 16px 24px;
+      border-right: 1px solid var(--gray-200);
+    }
+
+    .cs-meta-item:last-child {
+      border-right: none;
+    }
+
+    .cs-meta-item label {
+      font-family: var(--font-detail);
+      font-size: 9px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      color: var(--gray-400);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .cs-meta-item span {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray-900);
+    }
+
+    .cs-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 48px;
+    }
+
+    .cs-section {
+      margin-bottom: 56px;
+    }
+
+    .cs-section-label {
+      font-family: var(--font-detail);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--scarlet);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cs-section-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--scarlet);
+    }
+
+    .cs-section h2 {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 400;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .cs-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--gray-700);
+      margin-bottom: 12px;
+    }
+
+    .cs-image-placeholder {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 32px 0;
+      color: var(--gray-400);
+      font-family: var(--font-detail);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .cs-artifact-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .cs-artifact-links a {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 8px;
+      padding: 20px;
+      text-decoration: none;
+      color: var(--gray-900);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease;
+    }
+
+    .cs-artifact-links a:hover {
+      transform: translateY(-3px);
+    }
+
+    .cs-artifact-links strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 23px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .cs-artifact-links span {
+      font-family: var(--font-detail);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      color: var(--scarlet);
+      font-weight: 700;
+    }
+
+    .cs-nav-bottom {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 32px;
+    }
+
+    .cs-nav-bottom a {
+      font-family: var(--font-detail);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      color: var(--scarlet);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s;
+    }
+
+    .cs-nav-bottom a:hover {
+      gap: 12px;
+    }
+
+    .cs-next-wrap {
+      text-align: right;
+      text-decoration: none;
+    }
+
+    .cs-next-label {
+      font-family: var(--font-detail);
+      font-size: 11px;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .cs-next-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--gray-900);
+      transition: color 0.2s;
+    }
+
+    .cs-next-wrap:hover .cs-next-title {
+      color: var(--scarlet);
+    }
+
+    footer {
+      background: var(--gray-900);
+      color: var(--gray-400);
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-detail);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--gray-400);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: white;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    @media (max-width: 760px) {
+      .wireframe-bar {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 18px;
+      }
+
+      nav {
+        height: auto;
+        min-height: 60px;
+        padding: 14px 18px;
+        justify-content: flex-end;
+        position: relative;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 120;
+        background: rgba(250, 248, 245, 0.98);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding: 18px 20px 20px;
+        gap: 16px;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        font-size: 12px;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+
+      .cs-back {
+        margin-top: 36px;
+        padding: 0 24px;
+      }
+
+      .cs-hero-banner {
+        height: 200px;
+        margin: 32px 24px 0;
+      }
+
+      .cs-header,
+      .cs-body,
+      .cs-nav-bottom {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .cs-header h1 {
+        font-size: 38px;
+      }
+
+      .cs-meta-bar,
+      .cs-artifact-links {
+        grid-template-columns: 1fr;
+      }
+
+      .cs-meta-item {
+        border-right: none;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 18px;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wireframe-badge {
+        display: none;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .cs-back,
+      .cs-header,
+      .cs-body,
+      .cs-nav-bottom {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .cs-hero-banner {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+
+      .cs-header h1 {
+        font-size: 34px;
+      }
+
+      .cs-meta-item {
+        padding: 14px 18px;
+      }
+
+      .cs-section h2 {
+        font-size: 27px;
+      }
+
+      .cs-nav-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .cs-next-wrap {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wireframe-bar">
+    <div><strong>L&D Portfolio</strong> <span>- Jennay R. Barkley, M.Ed. | Case Study</span></div>
+    <div class="wireframe-badge">Project Detail</div>
+  </div>
+
+  <nav>
+    <button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-links" id="primary-nav">
+      <a href="index.html#skills">Expertise</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#artifacts">Artifacts</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="cs-back">
+      <a href="index.html#work" id="back-link">&larr; Back to All Projects</a>
+    </div>
+
+    <div class="cs-hero-banner">
+      <div class="cs-pattern"></div>
+      <span id="hero-label">Project Hero Image / Screenshot</span>
+    </div>
+
+    <div class="cs-header">
+      <div class="project-tag" id="cs-tag"></div>
+      <h1 id="cs-title"></h1>
+      <p class="cs-subtitle" id="cs-subtitle"></p>
+    </div>
+
+    <div class="cs-meta-bar">
+      <div class="cs-meta-item"><label>Role</label><span id="cs-role"></span></div>
+      <div class="cs-meta-item"><label>Tools</label><span id="cs-tools"></span></div>
+    </div>
+
+    <div class="cs-body">
+      <section class="cs-section">
+        <div class="cs-section-label">Problem</div>
+        <h2 id="cs-problem-title"></h2>
+        <p id="cs-problem-text"></p>
+      </section>
+
+      <div class="cs-image-placeholder">Project Artifact / Screenshot</div>
+
+      <section class="cs-section">
+        <div class="cs-section-label">Approach</div>
+        <h2 id="cs-approach-title"></h2>
+        <p id="cs-approach-text"></p>
+      </section>
+
+      <div class="cs-image-placeholder">Process Diagram / Storyboard</div>
+
+      <section class="cs-section">
+        <div class="cs-section-label">Solution</div>
+        <h2 id="cs-solution-title"></h2>
+        <p id="cs-solution-text"></p>
+      </section>
+
+      <div class="cs-image-placeholder">Final Deliverable Preview</div>
+
+      <section class="cs-section">
+        <div class="cs-section-label">Outcome</div>
+        <h2 id="cs-outcome-title"></h2>
+        <p id="cs-outcome-text"></p>
+      </section>
+
+    </div>
+
+    <div class="cs-nav-bottom">
+      <a href="index.html#work">&larr; All Projects</a>
+      <a class="cs-next-wrap" id="cs-next" href="#">
+        <span class="cs-next-label">Next Case Study</span>
+        <span class="cs-next-title" id="cs-next-title"></span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    <div>&copy; 2026 Jennay R. Barkley - All rights reserved.</div>
+    <div class="footer-links"><a href="https://www.linkedin.com/in/jennayrechelbarkley/" target="_blank">LinkedIn</a><a
+        href="mailto:jrbarkleyconsulting@gmail.com">Email</a></div>
+  </footer>
+
+  <script>
+    const caseStudies = {
+      onboarding: {
+        next: 'leadership',
+        tag: 'Case Study 01',
+        title: 'Rebuilding the Consultant Onboarding System',
+        role: 'People Operations Coordinator',
+        timeline: '8 weeks',
+        tools: 'Notion · Zapier · Jira · Asana',
+        audience: 'New hires across departments',
+        heroLabel: 'Onboarding Journey Map / Module Preview',
+        problemTitle: 'A Process Built on People, Not Systems',
+        problemText: 'The existing onboarding process was manual, siloed, and not built to scale. There was no single workflow connecting recruiters, department heads, or new consultants — meaning approvals got missed, handoffs were unclear, and nothing was trackable. As the sole person responsible for recruiting, hiring, and onboarding a growing consultant base, the process was becoming unsustainable.',
+        approachTitle: 'Mapping the Gaps Before Building the Fix',
+        approachText: 'Before rebuilding anything, I conducted information gathering sessions with department heads and recent hires to understand where the process was breaking down and what actually needed to be there. I mapped the full onboarding journey and identified every stage that required a decision, an approval, or a handoff between people.',
+        solutionTitle: 'One Workspace, Zero Blind Spots',
+        solutionText: 'I migrated the process from a fragmented Asana setup into a structured Notion workspace, integrating Zapier automations to trigger notifications and approvals at key stages — including leadership sign-offs and consultant schedule integration. I also linked Jira so I received a ticket whenever someone completed a critical step, giving me real-time visibility into where every consultant was in the process without chasing anyone down.',
+        outcomeTitle: 'From Pilot to Proof: 50% Retention Increase in 90 Days',
+        outcomeText: 'I piloted the new system within my department for 90 days. Engagement with the onboarding process increased, accuracy improved, and consultant retention increased by 50% — a result I attribute to people feeling supported and clear on expectations from day one.',
+      },
+      leadership: {
+        next: 'onboarding',
+        tag: 'Case Study 02',
+        title: 'Redesigning Career Curriculum for the AI-Era Job Market',
+        role: 'Program Success Manager',
+        timeline: '6 weeks',
+        tools: 'Google Slides · Canvas LMS · ChatGPT · Gemini · GenSpark · Google Forms',
+        audience: 'Mid-level managers',
+        heroLabel: 'Workshop Slide Deck / Facilitator Materials',
+        problemTitle: 'A Curriculum That Couldn\'t Keep Up',
+        problemText: 'The existing career readiness curriculum was built in Google Slides and had not been updated to reflect the rapidly evolving role of AI in the job search. Tools like LinkedIn had already incorporated AI features that learners were required to use — but without guidance, those features became a barrier rather than an advantage. For a learner population that was largely from underserved communities, many of whom were already navigating systemic barriers to employment, being left behind on emerging technology wasn\'t just an inconvenience — it was a threat to their access and confidence.',
+        approachTitle: 'Meeting Learners Where They Are, Not Where the Slides Were',
+        approachText: 'I recognized the disconnect between what was being taught and what learners were actually experiencing in the job market. I redesigned the technology week of the cohort curriculum to center AI as a practical, accessible tool — not an intimidating concept. My goal was to meet learners where they were and give them a genuine competitive advantage.',
+        solutionTitle: 'From Passive Slides to Hands-On AI Fluency',
+        solutionText: 'I rebuilt the Google Slides curriculum to incorporate hands-on AI integration — including live prompt-building exercises, guided walkthroughs of AI-powered LinkedIn features, and resume enhancement using AI tools. The session shifted from passive content delivery to active, applied learning where participants practiced using these tools in real time with support.',
+        outcomeTitle: 'One Cohort\'s Fix Became the Organization\'s Standard',
+        outcomeText: 'Engagement increased immediately and was confirmed through post-session surveys sent after each lesson. Learner confidence scores around the topic showed measurable improvement. The redesigned curriculum was ultimately adopted by the entire program team and implemented as the new standard across the organization — a sign that the update wasn\'t just effective for one cohort, but scalable and repeatable.',
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const projectKey = caseStudies[params.get('project')] ? params.get('project') : 'onboarding';
+    const cs = caseStudies[projectKey];
+    const next = caseStudies[cs.next];
+
+    document.title = cs.title + ' - Jennay R. Barkley';
+    document.getElementById('hero-label').textContent = cs.heroLabel;
+    document.getElementById('cs-tag').textContent = cs.tag;
+    document.getElementById('cs-title').textContent = cs.title;
+    document.getElementById('cs-subtitle').textContent = cs.subtitle;
+    document.getElementById('cs-role').textContent = cs.role;
+    document.getElementById('cs-tools').textContent = cs.tools;
+    document.getElementById('cs-problem-title').textContent = cs.problemTitle;
+    document.getElementById('cs-problem-text').textContent = cs.problemText;
+    document.getElementById('cs-approach-title').textContent = cs.approachTitle;
+    document.getElementById('cs-approach-text').textContent = cs.approachText;
+    document.getElementById('cs-solution-title').textContent = cs.solutionTitle;
+    document.getElementById('cs-solution-text').textContent = cs.solutionText;
+    document.getElementById('cs-outcome-title').textContent = cs.outcomeTitle;
+    document.getElementById('cs-outcome-text').textContent = cs.outcomeText;
+    const reflectionEl = document.getElementById('cs-reflection');
+    if (reflectionEl && cs.reflection) {
+      reflectionEl.textContent = cs.reflection;
+    }
+    const artifactsEl = document.getElementById('cs-artifacts');
+    if (artifactsEl && cs.artifacts) {
+      artifactsEl.innerHTML = cs.artifacts.map(artifact =>
+        '<a href="' + artifact.href + '" download><strong>' + artifact.title + '</strong><span>' + artifact.type + '</span></a>'
+      ).join('');
+    }
+    document.getElementById('cs-next-title').textContent = next.title;
+    document.getElementById('cs-next').href = 'case-study.html?project=' + cs.next;
+
+    document.getElementById('back-link').addEventListener('click', function (event) {
+      if (document.referrer && document.referrer.includes('index.html')) {
+        event.preventDefault();
+        history.back();
+      }
+    });
+
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+
+    window.addEventListener('load', function () {
+      window.scrollTo(0, 0);
+    });
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', function () {
+        const isOpen = navLinks.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+  </script>
+
+</body>
+
+</html>
