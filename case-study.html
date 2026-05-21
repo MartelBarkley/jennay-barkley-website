@@ -204,41 +204,6 @@
       gap: 12px;
     }
 
-    .cs-hero-banner {
-      margin: 32px auto 0;
-      max-width: 1184px;
-      height: 340px;
-      background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cs-hero-banner .cs-pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-      background-image:
-        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%);
-      background-size: 40px 70px;
-      background-position: 0 0, 0 0, 20px 35px, 20px 35px;
-    }
-
-    .cs-hero-banner span {
-      font-family: var(--font-detail);
-      font-size: 14px;
-      color: var(--gray-400);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      z-index: 1;
-    }
-
     .cs-header {
       padding: 48px 48px 0;
       max-width: 900px;
@@ -353,22 +318,6 @@
       line-height: 1.8;
       color: var(--gray-700);
       margin-bottom: 12px;
-    }
-
-    .cs-image-placeholder {
-      width: 100%;
-      height: 300px;
-      background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 32px 0;
-      color: var(--gray-400);
-      font-family: var(--font-detail);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
     }
 
     .cs-artifact-links {
@@ -550,11 +499,6 @@
         padding: 0 24px;
       }
 
-      .cs-hero-banner {
-        height: 200px;
-        margin: 32px 24px 0;
-      }
-
       .cs-header,
       .cs-body,
       .cs-nav-bottom {
@@ -598,11 +542,6 @@
       .cs-nav-bottom {
         padding-left: 20px;
         padding-right: 20px;
-      }
-
-      .cs-hero-banner {
-        margin-left: 20px;
-        margin-right: 20px;
       }
 
       .cs-header h1 {
@@ -651,11 +590,6 @@
       <a href="index.html#work" id="back-link">&larr; Back to All Projects</a>
     </div>
 
-    <div class="cs-hero-banner">
-      <div class="cs-pattern"></div>
-      <span id="hero-label">Project Hero Image / Screenshot</span>
-    </div>
-
     <div class="cs-header">
       <div class="project-tag" id="cs-tag"></div>
       <h1 id="cs-title"></h1>
@@ -674,23 +608,17 @@
         <p id="cs-problem-text"></p>
       </section>
 
-      <div class="cs-image-placeholder">Project Artifact / Screenshot</div>
-
       <section class="cs-section">
         <div class="cs-section-label">Approach</div>
         <h2 id="cs-approach-title"></h2>
         <p id="cs-approach-text"></p>
       </section>
 
-      <div class="cs-image-placeholder">Process Diagram / Storyboard</div>
-
       <section class="cs-section">
         <div class="cs-section-label">Solution</div>
         <h2 id="cs-solution-title"></h2>
         <p id="cs-solution-text"></p>
       </section>
-
-      <div class="cs-image-placeholder">Final Deliverable Preview</div>
 
       <section class="cs-section">
         <div class="cs-section-label">Outcome</div>
@@ -725,7 +653,6 @@
         timeline: '8 weeks',
         tools: 'Notion · Zapier · Jira · Asana',
         audience: 'New hires across departments',
-        heroLabel: 'Onboarding Journey Map / Module Preview',
         problemTitle: 'A Process Built on People, Not Systems',
         problemText: 'The existing onboarding process was manual, siloed, and not built to scale. There was no single workflow connecting recruiters, department heads, or new consultants — meaning approvals got missed, handoffs were unclear, and nothing was trackable. As the sole person responsible for recruiting, hiring, and onboarding a growing consultant base, the process was becoming unsustainable.',
         approachTitle: 'Mapping the Gaps Before Building the Fix',
@@ -743,7 +670,6 @@
         timeline: '6 weeks',
         tools: 'Google Slides · Canvas LMS · ChatGPT · Gemini · GenSpark · Google Forms',
         audience: 'Mid-level managers',
-        heroLabel: 'Workshop Slide Deck / Facilitator Materials',
         problemTitle: 'A Curriculum That Couldn\'t Keep Up',
         problemText: 'The existing career readiness curriculum was built in Google Slides and had not been updated to reflect the rapidly evolving role of AI in the job search. Tools like LinkedIn had already incorporated AI features that learners were required to use — but without guidance, those features became a barrier rather than an advantage. For a learner population that was largely from underserved communities, many of whom were already navigating systemic barriers to employment, being left behind on emerging technology wasn\'t just an inconvenience — it was a threat to their access and confidence.',
         approachTitle: 'Meeting Learners Where They Are, Not Where the Slides Were',
@@ -761,7 +687,6 @@
     const next = caseStudies[cs.next];
 
     document.title = cs.title + ' - Jennay R. Barkley';
-    document.getElementById('hero-label').textContent = cs.heroLabel;
     document.getElementById('cs-tag').textContent = cs.tag;
     document.getElementById('cs-title').textContent = cs.title;
     document.getElementById('cs-subtitle').textContent = cs.subtitle;

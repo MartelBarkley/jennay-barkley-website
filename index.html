@@ -510,63 +510,6 @@
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
     }
 
-    .project-card:hover .project-thumb-overlay {
-      opacity: 1;
-    }
-
-    .project-thumb {
-      width: 100%;
-      height: 220px;
-      background: linear-gradient(135deg, var(--gray-700), var(--gray-800));
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .project-thumb-pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.06;
-      background-image:
-        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%);
-      background-size: 40px 70px;
-      background-position: 0 0, 0 0, 20px 35px, 20px 35px;
-    }
-
-    .project-thumb>span {
-      font-family: var(--font-detail);
-      font-size: 12px;
-      color: var(--gray-400);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      z-index: 1;
-    }
-
-    .project-thumb-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(187, 0, 0, 0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .project-thumb-overlay span {
-      color: white;
-      font-family: var(--font-detail);
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
     .project-info {
       padding: 28px 32px 32px;
     }
@@ -973,41 +916,6 @@
       gap: 12px;
     }
 
-    .cs-hero-banner {
-      margin: 32px auto 0;
-      max-width: 1184px;
-      height: 340px;
-      background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cs-hero-banner .cs-pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-      background-image:
-        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(30deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%),
-        linear-gradient(150deg, white 12%, transparent 12.5%, transparent 87%, white 87.5%);
-      background-size: 40px 70px;
-      background-position: 0 0, 0 0, 20px 35px, 20px 35px;
-    }
-
-    .cs-hero-banner span {
-      font-family: var(--font-detail);
-      font-size: 14px;
-      color: var(--gray-400);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      z-index: 1;
-    }
-
     .cs-header {
       padding: 48px 48px 0;
       max-width: 900px;
@@ -1108,22 +1016,6 @@
       line-height: 1.8;
       color: var(--gray-700);
       margin-bottom: 12px;
-    }
-
-    .cs-image-placeholder {
-      width: 100%;
-      height: 300px;
-      background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 32px 0;
-      color: var(--gray-400);
-      font-family: var(--font-detail);
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
     }
 
     .cs-outcomes {
@@ -1361,11 +1253,6 @@
         grid-template-columns: 1fr;
       }
 
-      .cs-hero-banner {
-        height: 200px;
-        margin: 32px 24px 0;
-      }
-
       .cs-header,
       .cs-body,
       .cs-nav-bottom {
@@ -1533,11 +1420,6 @@
       </div>
       <div class="project-grid">
         <a class="project-card" href="case-study.html?project=onboarding">
-          <div class="project-thumb">
-            <div class="project-thumb-pattern"></div>
-            <span>Onboarding Project Preview</span>
-            <div class="project-thumb-overlay"><span>View Case Study</span></div>
-          </div>
           <div class="project-info">
             <div class="project-tag">Case Study 01</div>
             <h3>Rebuilding the Consultant Onboarding System</h3>
@@ -1559,11 +1441,6 @@
         </a>
 
         <a class="project-card" href="case-study.html?project=leadership">
-          <div class="project-thumb">
-            <div class="project-thumb-pattern"></div>
-            <span>Career Curriculum Preview</span>
-            <div class="project-thumb-overlay"><span>View Case Study</span></div>
-          </div>
           <div class="project-info">
             <div class="project-tag">Case Study 02</div>
             <h3>Redesigning Career Curriculum for the AI-Era Job Market</h3>
