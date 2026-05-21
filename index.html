@@ -650,12 +650,24 @@
 
     .artifact-action {
       margin-top: auto;
+      align-self: flex-start;
       font-family: var(--font-detail);
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 1.3px;
       text-transform: uppercase;
       color: var(--scarlet);
+      border: 2px solid rgba(187, 0, 0, 0.4);
+      background: rgba(187, 0, 0, 0.08);
+      padding: 10px 18px;
+      border-radius: 4px;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .artifact-card:hover .artifact-action {
+      background: var(--scarlet);
+      border-color: var(--scarlet);
+      color: white;
     }
 
     .pdf-modal {
@@ -790,6 +802,109 @@
       opacity: 0.8;
       letter-spacing: 1px;
       text-transform: uppercase;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 880px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    .carousel-track {
+      position: relative;
+      min-height: 220px;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .carousel-slide.active {
+      position: relative;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .carousel-slide blockquote {
+      margin-bottom: 18px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 1;
+      transition: background 0.2s, border-color 0.2s;
+      z-index: 2;
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: white;
+    }
+
+    .carousel-btn.prev {
+      left: -8px;
+    }
+
+    .carousel-btn.next {
+      right: -8px;
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 28px;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .carousel-dot.active {
+      background: white;
+      transform: scale(1.2);
+    }
+
+    @media (max-width: 760px) {
+      .carousel-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .carousel-btn.prev {
+        left: -4px;
+      }
+
+      .carousel-btn.next {
+        right: -4px;
+      }
     }
 
     .contact {
@@ -1351,8 +1466,8 @@
         <p class="hero-summary">
           I'm a Learning & Development Specialist with over 7 years of experience designing training solutions that make
           complex information clear and accessible. I specialize in bridging the gap between subject matter experts,
-          instructional design, and the people who actually need to learn — translating what organizations know into
-          what employees can use. I'm known for being organized, efficient, and easy to work with across teams.
+          instructional design, and the people who actually need to learn, translating what organizations know into what
+          employees can use. I'm known for being organized, efficient, and easy to work with across teams.
         </p>
         <div class="hero-actions">
           <a href="#work" class="btn-primary">View Case Studies</a>
@@ -1377,7 +1492,7 @@
                 <path d="M12 2a7 7 0 0 0-4 12c.7.6 1 1.4 1 2h6c0-.6.3-1.4 1-2a7 7 0 0 0-4-12Z" />
               </svg></div>
             <h3>Design & Development</h3>
-            <p>Instructional design · Curriculum development · Content redesign</p>
+            <p>Instructional Design · Curriculum Development · Content Redesign</p>
           </div>
           <div class="skill-card">
             <div class="skill-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1386,7 +1501,7 @@
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
               </svg></div>
             <h3>Project & Process Management</h3>
-            <p>Workflow systems · Process documentation · LMS administration</p>
+            <p>Workflow Systems · Process Documentation · LMS Administration</p>
           </div>
           <div class="skill-card">
             <div class="skill-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1397,7 +1512,7 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg></div>
             <h3>Facilitation & Delivery</h3>
-            <p>Facilitation · Adult learning theory · Learner-centered design</p>
+            <p>Facilitation · Adult Learning Theory · Learner-centered Design</p>
           </div>
           <div class="skill-card">
             <div class="skill-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1406,7 +1521,7 @@
                   d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.91.33 1.8.62 2.65a2 2 0 0 1-.45 2.11L8 9.76a16 16 0 0 0 6 6l1.28-1.28a2 2 0 0 1 2.11-.45c.85.29 1.74.5 2.65.62A2 2 0 0 1 22 16.92z" />
               </svg></div>
             <h3>Stakeholder & Communication</h3>
-            <p>Needs assessment · SME collaboration · Stakeholder alignment</p>
+            <p>Needs Assessment · SME Collaboration · Stakeholder Alignment</p>
           </div>
         </div>
       </div>
@@ -1472,58 +1587,78 @@
       </div>
       <div class="artifact-grid">
         <a class="artifact-card" href="artifacts/employment-intake-form.pdf" data-pdf-title="Employment Intake Form">
-          <div class="artifact-type">PDF</div>
           <h3>Employment Intake Form</h3>
           <p>This employer intake form was developed during my time at We Can Code IT to assess hiring needs before
             matching employers with our bootcamp graduates. Before any candidate was placed, I gathered information from
             hiring managers about technical requirements, team culture, and what success looked like in the role. The
             process mirrors a training needs assessment: identifying stakeholder needs, surfacing assumptions, and
-            defining outcomes before building a solution. The context is different; the thinking is the same.</p>
+            defining outcomes before building a solution. The context is different; the thinking is the same.
+          </p>
           <span class="artifact-action">View Preview</span>
         </a>
         <a class="artifact-card" href="artifacts/presentation-readiness-worksheet.pdf"
           data-pdf-title="Presentation Readiness Worksheet">
-          <div class="artifact-type">PDF</div>
           <h3>Presentation Readiness Worksheet</h3>
           <p>This worksheet was developed at the American Gem Society to support our Director of Learning in preparing
-            to present one of the most controversial topics to hit the jewelry industry, the introduction of lab grown
+            to present one of the most controversial topics to hit the jewelry industry: the introduction of lab grown
             diamonds. Before a single slide was finalized, we surveyed the team, researched circulating opinions, and
             built talking points designed to meet a skeptical audience with confidence and empathy. The result was a
             presenter who walked in prepared, not just informed. Getting someone ready to deliver tough information well
-            is something I genuinely enjoy and this tool is how I approach that work.</p>
+            is something I genuinely enjoy and this tool is how I approach that work.
+          </p>
           <span class="artifact-action">View Preview</span>
         </a>
         <a class="artifact-card" href="artifacts/freedom-delayed.pdf"
           data-pdf-title="Freedom Delayed: A Juneteenth Celebration">
-          <div class="artifact-type">PDF</div>
           <h3>Freedom Delayed: A Juneteenth Celebration</h3>
           <p>This presentation was created for Pathrise's company-wide Juneteenth celebration in 2023 as part of the
-            Black at Pathrise ERG. I designed the deck to do more than share history. The goal was to create a moment
+            Black at Pathrise ERG. I designed the deck to do more than share history: the goal was to create a moment
             where every person in the room, regardless of their background, could find a personal connection to the
             story of freedom, persistence, and recognition. The reflection prompt at the center of the presentation was
-            intentional — good learning does not just inform, it moves people. Note: this is a high level snapshot of
-            the full presentation. The original deck included additional historical context and interactive elements not
-            captured here.</p>
+            intentional: good learning does not just inform, it moves people. Note: this is a high level snapshot of the
+            full presentation. The original deck included additional historical context and interactive elements not
+            captured here.
+          </p>
           <span class="artifact-action">View Preview</span>
         </a>
         <a class="artifact-card" href="artifacts/program-designer-interview-simulation-2025-pt-1.pdf"
           data-pdf-title="Early Learner Retention: A Program Design Proposal">
-          <div class="artifact-type">PDF</div>
           <h3>Early Learner Retention: A Program Design Proposal</h3>
           <p>This proposal was developed and presented to leadership from a Program Success Manager perspective as part
             of an ongoing effort to close the early retention gap among learners. The ideas put forward aligned with an
             internal initiative I was contributing to called the Red Carpet Engagement Project. The work behind this
             deck reflects how I approach any learning problem: start with the data, ground the solution in learning
-            theory, anticipate barriers, and build toward something measurable and scalable.</p>
+            theory, anticipate barriers, and build toward something measurable and scalable.
+          </p>
           <span class="artifact-action">View Preview</span>
         </a>
       </div>
     </section>
 
     <section class="testimonial">
-      <blockquote>"Placeholder for a recommendation from a professor, supervisor, or colleague that speaks to Jennay's
-        impact as an instructional designer and collaborator."</blockquote>
-      <cite>- Name, Title, Organization</cite>
+      <div class="carousel" id="testimonial-carousel" aria-roledescription="carousel" aria-label="Testimonials">
+        <button class="carousel-btn prev" type="button" aria-label="Previous testimonial">&#8249;</button>
+        <div class="carousel-track">
+          <div class="carousel-slide active" aria-roledescription="slide">
+            <blockquote>"Jennay is a standout collaborative leader with a rare ability to balance data-informed
+              decision-making with a truly inclusive, team-centered approach"</blockquote>
+            <cite>- Maranda Lee, Senior Program Manager</cite>
+          </div>
+          <div class="carousel-slide" aria-roledescription="slide">
+            <blockquote>"She brings a rare combination of empathy, innovation, and precision to every aspect of her
+              work, delivering exceptional support while driving meaningful process improvements."</blockquote>
+            <cite>- Anthony Hubbard, Higher Education & Workforce Development Leader</cite>
+          </div>
+          <div class="carousel-slide" aria-roledescription="slide">
+            <blockquote>"Jennay is a pleasure to work with, personable, professional, and always willing to tackle any
+              challenge. Her attention to detail and ability to build strong relationships reflect her thoughtful,
+              caring approach to collaboration"</blockquote>
+            <cite>- Eileen Lee, People & HR Leader</cite>
+          </div>
+        </div>
+        <button class="carousel-btn next" type="button" aria-label="Next testimonial">&#8250;</button>
+        <div class="carousel-dots" role="tablist"></div>
+      </div>
     </section>
 
     <section class="contact" id="contact">
@@ -1664,6 +1799,55 @@
         renderPdf(activePdfUrl);
       }, 180);
     });
+
+    (function () {
+      const carousel = document.getElementById('testimonial-carousel');
+      if (!carousel) return;
+      const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
+      const dotsContainer = carousel.querySelector('.carousel-dots');
+      const prevBtn = carousel.querySelector('.carousel-btn.prev');
+      const nextBtn = carousel.querySelector('.carousel-btn.next');
+      let current = 0;
+      let timer;
+
+      const dots = slides.map(function (_, i) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Show testimonial ' + (i + 1));
+        dot.addEventListener('click', function () { go(i); restart(); });
+        dotsContainer.appendChild(dot);
+        return dot;
+      });
+
+      function go(index) {
+        slides[current].classList.remove('active');
+        dots[current].classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current].classList.add('active');
+      }
+
+      function next() { go(current + 1); }
+      function prev() { go(current - 1); }
+
+      function start() {
+        window.clearInterval(timer);
+        timer = window.setInterval(next, 5000);
+      }
+      function stop() { window.clearInterval(timer); }
+      function restart() { start(); }
+
+      nextBtn.addEventListener('click', function () { next(); restart(); });
+      prevBtn.addEventListener('click', function () { prev(); restart(); });
+
+      start();
+
+      let userMoved = false;
+      window.addEventListener('mousemove', function () { userMoved = true; }, { once: true });
+      carousel.addEventListener('mouseenter', function () { if (userMoved) stop(); });
+      carousel.addEventListener('mouseleave', function () { if (userMoved) start(); });
+    })();
 
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
