@@ -585,6 +585,30 @@
       text-transform: none;
     }
 
+    .project-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      font-family: var(--font-detail);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
+
+    .project-action::after {
+      content: "→";
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .project-card:hover .project-action::after {
+      transform: translateX(4px);
+    }
+
     .artifacts {
       padding: 100px 48px;
       max-width: 1180px;
@@ -646,6 +670,13 @@
       line-height: 1.75;
       color: var(--gray-500);
       margin-bottom: 24px;
+    }
+
+    .artifact-note {
+      display: block;
+      font-size: 12px;
+      line-height: 1.55;
+      margin-top: 14px;
     }
 
     .artifact-action {
@@ -1464,10 +1495,13 @@
         <div class="hero-tag">Learning & Development Professional</div>
         <h1>Jennay R. Barkley, M.Ed</h1>
         <p class="hero-summary">
-          I'm a Learning & Development Specialist with over 7 years of experience designing training solutions that make
-          complex information clear and accessible. I specialize in bridging the gap between subject matter experts,
-          instructional design, and the people who actually need to learn, translating what organizations know into what
-          employees can use. I'm known for being organized, efficient, and easy to work with across teams.
+          I sit at the intersection of learning design, workforce development, and organizational strategy. Over 7 years
+          I have built training programs, redesigned broken processes, and created learning experiences that move people
+          from confusion to confidence. I specialize in translating what organizations know into what their people can
+          use, and I am known for being the person who brings structure, clarity, and follow-through to work that
+          matters. Whether I am working with a subject matter expert, a leadership team, or a room full of learners, I
+          show up organized, intentional, and ready to make complex things simple.
+
         </p>
         <div class="hero-actions">
           <a href="#work" class="btn-primary">View Case Studies</a>
@@ -1552,6 +1586,7 @@
               <span>Role <strong>People Operations Coordinator</strong></span>
               <span>Tools <strong>Notion, Zapier, Jira, Asana</strong></span>
             </div>
+            <span class="project-action">View case study</span>
           </div>
         </a>
 
@@ -1573,6 +1608,7 @@
               <span>Role <strong>Program Success Manager</strong></span>
               <span>Tools <strong>Google Slides, Canvas LMS, AI Tools</strong></span>
             </div>
+            <span class="project-action">View case study</span>
           </div>
         </a>
       </div>
@@ -1586,12 +1622,12 @@
           tools</p>
       </div>
       <div class="artifact-grid">
-        <a class="artifact-card" href="artifacts/employment-intake-form.pdf" data-pdf-title="Employment Intake Form">
-          <h3>Employment Intake Form</h3>
+        <a class="artifact-card" href="artifacts/employment-intake-form.pdf" data-pdf-title="Employer Intake Form">
+          <h3>Employer Intake Form</h3>
           <p>This employer intake form was developed during my time at We Can Code IT to assess hiring needs before
             matching employers with our bootcamp graduates. Before any candidate was placed, I gathered information from
             hiring managers about technical requirements, team culture, and what success looked like in the role. The
-            process mirrors a training needs assessment: identifying stakeholder needs, surfacing assumptions, and
+            process mirrors a training needs assessment: identifying stakeholder needs, surfacing assumptions and
             defining outcomes before building a solution. The context is different; the thinking is the same.
           </p>
           <span class="artifact-action">View Preview</span>
@@ -1612,12 +1648,12 @@
           data-pdf-title="Freedom Delayed: A Juneteenth Celebration">
           <h3>Freedom Delayed: A Juneteenth Celebration</h3>
           <p>This presentation was created for Pathrise's company-wide Juneteenth celebration in 2023 as part of the
-            Black at Pathrise ERG. I designed the deck to do more than share history: the goal was to create a moment
+            BlackRISE ERG. I designed the deck to do more than share history: the goal was to create a moment
             where every person in the room, regardless of their background, could find a personal connection to the
             story of freedom, persistence, and recognition. The reflection prompt at the center of the presentation was
-            intentional: good learning does not just inform, it moves people. Note: this is a high level snapshot of the
-            full presentation. The original deck included additional historical context and interactive elements not
-            captured here.
+            intentional: good learning does not just inform, it moves people.
+            <span class="artifact-note">* This is a high level snapshot of the full presentation. The original deck
+              included additional historical context and interactive elements not captured here.</span>
           </p>
           <span class="artifact-action">View Preview</span>
         </a>
@@ -1628,7 +1664,7 @@
             of an ongoing effort to close the early retention gap among learners. The ideas put forward aligned with an
             internal initiative I was contributing to called the Red Carpet Engagement Project. The work behind this
             deck reflects how I approach any learning problem: start with the data, ground the solution in learning
-            theory, anticipate barriers, and build toward something measurable and scalable.
+            theory, anticipate barriers and build toward something measurable and scalable.
           </p>
           <span class="artifact-action">View Preview</span>
         </a>
@@ -1665,7 +1701,7 @@
       <div class="section-header">
         <div class="overline">Let's Connect</div>
         <h2>Ready to collaborate?</h2>
-        <p>I'd love to discuss how my instructional design skills can support your team's learning goals.</p>
+        <p>I'd love to discuss how my skills can support your team's learning goals.</p>
       </div>
       <div class="contact-actions">
         <a href="mailto:jrbarkleyconsulting@gmail.com" class="btn-primary">Send an Email</a>
